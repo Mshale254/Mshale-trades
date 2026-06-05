@@ -1,51 +1,250 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MSHALE TECH – CYBER SERVICES</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg: #0f172a;           /* slate-900 */
-      --bg-soft:#0b1228;       /* deeper navy */
-      --card:#111827;          /* gray-900 */
-      --muted:#94a3b8;         /* slate-400 */
-      --text:#e5e7eb;          /* gray-200 */
-      --brand:#22d3ee;         /* cyan-400 */
-      --brand-2:#a78bfa;       /* violet-400 */
-      --acc:#34d399;           /* emerald-400 */
-      --warn:#f59e0b;          /* amber-500 */
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%;background: radial-gradient(1100px 600px at 10% -10%,rgba(34,211,238,.15),transparent 60%), radial-gradient(900px 600px at 100% 0,rgba(167,139,250,.15),transparent 60%), var(--bg); color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-    a{color:inherit; text-decoration:none}
-    .container{max-width:1100px; margin:0 auto; padding: 28px 18px}
-    .pill{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:999px; background: linear-gradient(90deg, rgba(34,211,238,.12), rgba(167,139,250,.12)); border:1px solid rgba(255,255,255,.08); color:var(--muted); font-weight:600; letter-spacing:.2px}
-    .hero{padding:76px 0 36px}
-    .hero h1{font-size: clamp(28px, 5vw, 56px); line-height:1.05; margin:14px 0; font-weight:800;}
-    .grad{background: linear-gradient(90deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
-    .hero p{max-width:720px; color:var(--muted); font-size: clamp(14px, 2.4vw, 18px)}.cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px}
-.btn{padding:14px 18px; border-radius:12px; font-weight:700; border:1px solid rgba(255,255,255,.12); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); backdrop-filter: blur(6px); box-shadow:var(--shadow); transition:.2s transform, .2s box-shadow}
-.btn:hover{transform:translateY(-1px); box-shadow:0 16px 40px rgba(0,0,0,.45)}
-.btn.primary{background: linear-gradient(90deg,var(--brand),var(--brand-2)); color:#0b1228; border: none}
-.btn.ghost{color:var(--text)}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.section{padding:38px 0}
-.section h2{font-size: clamp(22px, 3vw, 34px); margin: 0 0 14px;}
-.sub{color:var(--muted); margin-top:4px}
+<title>MSHALE TECH Trading Dashboard</title>
 
-.grid{display:grid; gap:16px}
-@media (min-width:700px){ .grid.cols-3{grid-template-columns: repeat(3, 1fr)} }
-@media (min-width:900px){ .grid.cols-4{grid-template-columns: repeat(4, 1fr)} }
+<style>
 
-.card{background: linear-gradient(180deg, rgba(17,24,39,1), rgba(11,18,40,1)); border:1px solid rgba(255,255,255,.06); padding:18px; border-radius: var(--radius); box-shadow: var(--shadow); position:relative; overflow:hidden}
-.card .tick{position:absolute; right:10px; top:10px; opacity:.25}
-.card h3{font-size:17px; margin:2px 0 6px}
-.card p{color:var(--muted); font-size:14px; margin:0}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    font-family:Arial,sans-serif;
+}
+
+/* Header */
+
+header{
+    background:#1e293b;
+    padding:10px 20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.4);
+}
+
+.logo-container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #38bdf8;
+}
+
+.branding h1{
+    color:#38bdf8;
+    font-size:24px;
+}
+
+.branding p{
+    color:#cbd5e1;
+    font-size:13px;
+}
+
+/* Main Chart */
+
+.chart-container{
+    width:100%;
+    height:calc(100vh - 90px);
+}
+
+#tradingview_chart{
+    width:100%;
+    height:100%;
+}
+
+/* Widgets */
+
+.widget-section{
+    padding:15px;
+}
+
+.widget-title{
+    margin-bottom:10px;
+    color:#38bdf8;
+}
+
+/* Floating Logo */
+
+.floating-logo{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:9999;
+}
+
+.floating-logo img{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    border:2px solid #38bdf8;
+    box-shadow:0 0 15px rgba(0,0,0,.6);
+}
+
+/* Footer */
+
+.footer{
+    background:#1e293b;
+    text-align:center;
+    padding:15px;
+    color:#94a3b8;
+}
+
+@media(max-width:768px){
+
+.logo-container{
+    flex-direction:column;
+}
+
+.branding{
+    text-align:center;
+}
+
+.chart-container{
+    height:80vh;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="logo-container">
+
+<img src="mshale-logo.jpg" alt="MSHALE TECH" class="logo">
+
+<div class="branding">
+<h1>MSHALE TECH</h1>
+<p>Forex • Crypto • Stocks • Indices</p>
+</div>
+
+</div>
+
+</header>
+
+<!-- FULLSCREEN CHART -->
+
+<div class="chart-container">
+
+<div id="tradingview_chart"></div>
+
+</div>
+
+<!-- WATCHLIST -->
+
+<div class="widget-section">
+
+<h2 class="widget-title">Market Watchlist</h2>
+
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget"></div>
+
+<script type="text/javascript"
+src="https://s3.tradingview.com/external-embedding/embed-widget-watchlist.js"
+async>
+{
+  "colorTheme":"dark",
+  "displayMode":"adaptive",
+  "width":"100%",
+  "height":500,
+  "watchlist":[
+    "FX:EURUSD",
+    "OANDA:XAUUSD",
+    "BINANCE:BTCUSDT",
+    "NASDAQ:AAPL",
+    "FOREXCOM:DJI",
+    "BINANCE:ETHUSDT"
+  ]
+}
+</script>
+
+</div>
+
+</div>
+
+<!-- ECONOMIC CALENDAR -->
+
+<div class="widget-section">
+
+<h2 class="widget-title">Economic Calendar</h2>
+
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget"></div>
+
+<script type="text/javascript"
+src="https://s3.tradingview.com/external-embedding/embed-widget-events.js"
+async>
+{
+  "colorTheme":"dark",
+  "isTransparent":false,
+  "width":"100%",
+  "height":600,
+  "locale":"en",
+  "importanceFilter":"-1,0,1"
+}
+</script>
+
+</div>
+
+</div>
+
+<!-- FLOATING LOGO -->
+
+<div class="floating-logo">
+
+<img src="mshale-logo.jpg" alt="MSHALE TECH">
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+© 2026 MSHALE TECH | Professional Trading Dashboard
+
+</div>
+
+<!-- MAIN CHART -->
+
+<script src="https://s3.tradingview.com/tv.js"></script>
+
+<script>
+
+new TradingView.widget({
+    "autosize": true,
+    "symbol": "BINANCE:BTCUSDT",
+    "interval": "15",
+    "timezone": "Africa/Nairobi",
+    "theme": "dark",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#1e293b",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "container_id": "tradingview_chart"
+});
+
+</script>
+
+</body>
+</html>.card p{color:var(--muted); font-size:14px; margin:0}
 
 .pricing{display:grid; gap:16px}
 @media (min-width:800px){ .pricing{grid-template-columns: repeat(5,1fr)} }
